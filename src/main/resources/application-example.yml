@@ -1,0 +1,44 @@
+# Eventra — Template configurare locala
+# Copiaza in application-local.yml si completeaza
+# NU adauga application-local.yml in Git
+
+spring:
+  datasource:
+    url: jdbc:postgresql://YOUR_SUPABASE_HOST:5432/postgres
+    username: postgres
+    password: YOUR_SUPABASE_PASSWORD
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+      data-source-properties:
+        sslmode: require
+
+  mail:
+    host: smtp.resend.com
+    port: 587
+    username: resend
+    password: YOUR_RESEND_API_KEY
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+jwt:
+  secret: YOUR_JWT_SECRET_MINIMUM_32_CHARACTERS_LONG
+  access-token-expiration: 900000
+  refresh-token-expiration: 604800000
+
+cloudinary:
+  cloud-name: YOUR_CLOUD_NAME
+  api-key: YOUR_API_KEY
+  api-secret: YOUR_API_SECRET
+
+sentry:
+  dsn: YOUR_SENTRY_DSN
+  environment: local
+
+logging:
+  level:
+    com.eventra: DEBUG
+    org.hibernate.SQL: DEBUG

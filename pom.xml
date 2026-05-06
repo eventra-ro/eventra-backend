@@ -6,7 +6,6 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- ── PARENT ──────────────────────────────────────────────── -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -14,7 +13,6 @@
         <relativePath/>
     </parent>
 
-    <!-- ── PROJECT INFO ────────────────────────────────────────── -->
     <groupId>com.eventra</groupId>
     <artifactId>eventra-backend</artifactId>
     <version>0.1.0-SNAPSHOT</version>
@@ -22,7 +20,6 @@
     <description>Eventra — Event planning hub REST API</description>
     <packaging>jar</packaging>
 
-    <!-- ── PROPERTIES ──────────────────────────────────────────── -->
     <properties>
         <java.version>21</java.version>
         <mapstruct.version>1.6.3</mapstruct.version>
@@ -30,15 +27,13 @@
         <jjwt.version>0.12.6</jjwt.version>
         <springdoc.version>2.8.6</springdoc.version>
         <cloudinary.version>1.39.0</cloudinary.version>
-        <bucket4j.version>8.14.0</bucket4j.version>
         <testcontainers.version>1.20.4</testcontainers.version>
         <sentry.version>8.11.1</sentry.version>
     </properties>
 
-    <!-- ── DEPENDENCIES ────────────────────────────────────────── -->
     <dependencies>
 
-        <!-- ── SPRING BOOT CORE ─────────────────────────────────── -->
+        <!-- SPRING BOOT CORE -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -69,7 +64,7 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- ── DATABASE ─────────────────────────────────────────── -->
+        <!-- DATABASE -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -86,7 +81,7 @@
             <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
 
-        <!-- ── LOMBOK ───────────────────────────────────────────── -->
+        <!-- LOMBOK -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -94,14 +89,14 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- ── MAPSTRUCT ────────────────────────────────────────── -->
+        <!-- MAPSTRUCT -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
 
-        <!-- ── JWT ──────────────────────────────────────────────── -->
+        <!-- JWT -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -122,42 +117,42 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- ── OPENAPI / SWAGGER ────────────────────────────────── -->
+        <!-- OPENAPI / SWAGGER -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
 
-        <!-- ── CLOUDINARY ───────────────────────────────────────── -->
+        <!-- CLOUDINARY -->
         <dependency>
             <groupId>com.cloudinary</groupId>
             <artifactId>cloudinary-http45</artifactId>
             <version>${cloudinary.version}</version>
         </dependency>
 
-        <!-- ── RATE LIMITING ────────────────────────────────────── -->
+        <!-- RATE LIMITING — Bucket4j (group ID corect pentru v8+) -->
         <dependency>
-            <groupId>com.github.vladimir-bukhtoyarov</groupId>
+            <groupId>com.bucket4j</groupId>
             <artifactId>bucket4j-core</artifactId>
-            <version>${bucket4j.version}</version>
+            <version>8.10.1</version>
         </dependency>
 
-        <!-- ── SENTRY ───────────────────────────────────────────── -->
+        <!-- SENTRY -->
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-spring-boot-starter-jakarta</artifactId>
             <version>${sentry.version}</version>
         </dependency>
 
-        <!-- ── OWASP HTML SANITIZER (XSS protection) ────────────── -->
+        <!-- OWASP HTML SANITIZER -->
         <dependency>
             <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
             <artifactId>owasp-java-html-sanitizer</artifactId>
             <version>20240325.1</version>
         </dependency>
 
-        <!-- ── TEST ─────────────────────────────────────────────── -->
+        <!-- TEST -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -186,11 +181,9 @@
 
     </dependencies>
 
-    <!-- ── BUILD ────────────────────────────────────────────────── -->
     <build>
         <plugins>
 
-            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -204,7 +197,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Compiler cu Lombok + MapStruct -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -212,13 +204,11 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <annotationProcessorPaths>
-                        <!-- Lombok trebuie să fie PRIMUL -->
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
                         </path>
-                        <!-- MapStruct după Lombok -->
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
@@ -231,7 +221,6 @@
                 </configuration>
             </plugin>
 
-            <!-- JaCoCo pentru code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

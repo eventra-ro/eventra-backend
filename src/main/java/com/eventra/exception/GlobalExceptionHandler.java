@@ -52,6 +52,13 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error("VALIDATION_ERROR", message));
     }
 
+    @ExceptionHandler(VendorProfileAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<Void>> handleVendorExists(
+            VendorProfileAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ApiResponse.error("VENDOR_PROFILE_EXISTS", ex.getMessage()));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleGeneric(Exception ex) {
         log.error("Eroare neașteptată: {}", ex.getMessage(), ex);
